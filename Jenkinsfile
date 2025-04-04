@@ -30,11 +30,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'dotnet restore'
-                bat 'dotnet build --configuration Release'
-                bat 'dotnet publish -c Release -o ./publish'
+                dir('WebAPI') {
+                    bat 'dotnet publish -c Release -o ./publish'
+                }
+                
             }
         }
+
 
         stage('Deploy') {
             steps {
