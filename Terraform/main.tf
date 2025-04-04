@@ -25,7 +25,6 @@ resource "azurerm_linux_web_app" "serviceApp" {
   name = var.linux_web_app_name
   resource_group_name = azurerm_resource_group.rg.name
   site_config {
-
             application_stack {
               dotnet_version = "8.0"
             }
