@@ -32,6 +32,7 @@ pipeline {
             steps {
                 dir('WebAPI') {
                     bat 'dotnet publish -c Release -o ./publish'
+                    bat 'powershell Compress-Archive -Path ./publish/* -DestinationPath publish.zip'
                 }
                 
             }
@@ -40,11 +41,14 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                withCredentials([azureServicePrincipal(credentialsId: AZURE_CREDENTIALS_ID)]) {
+               dir('WebAPI') {
+                    withCredentials([azureServicePrincipal(credentialsId: AZURE_CREDENTIALS_ID)]) {
                     bat "az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID"
-                    bat "powershell Compress-Archive -Path ./publish/* -DestinationPath ./publish.zip -Force"
+                    
                     bat "az webapp deploy --resource-group $RESOURCE_GROUP --name $APP_SERVICE_NAME --src-path ./publish.zip --type zip"
                 }
+                }
+                   
             }
         }
     }
