@@ -27,7 +27,7 @@ resource "azurerm_linux_web_app" "serviceApp" {
   site_config {
             always_on = false
             application_stack {
-              python_version = "3.13"
+              dotnet_version = "8.0"
             }
             
          }
