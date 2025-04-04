@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/TanishqJecrc/DotNet8WebApp.git'
+                git branch: 'master', url: 'https://github.com/TanishqJecrc/JenkinsTerraformWebAPI.git'
             }
         }
          stage('Terraform Init') {
