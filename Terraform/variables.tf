@@ -13,7 +13,7 @@ variable "location" {
 variable "resource_group_name" {
   description = "resource group name"
   type = string
-  default = "rg-jenkins"
+  default = "rg-jenkins2"
 }
 
 variable "os" {
